@@ -48,7 +48,7 @@
         }
 
         if(empty($username_err) && empty($password_err)){					/*if empty yung error*/
-            $sql = "SELECT id, first_name, middle_name, last_name, username, password, gender, address FROM users WHERE username = ?";	
+            $sql = "SELECT id, first_name, middle_name, last_name, username, password, gender, user_type FROM users WHERE username = ?";	
             																								/*kukunin niya yung data sa db na may kaparehong username*/
             if($stmt = mysqli_prepare($link, $sql)){							/*kapag may laman, ipreprepare niya yung laman sql query tulad ng select para sa operation*/
                 mysqli_stmt_bind_param($stmt, "s", $param_username,);			/*kailangan ito para magexecute, binabind niya variables to parameter markers (hindi ko po ito alam)*/
@@ -56,9 +56,9 @@
                 if(mysqli_stmt_execute($stmt)){									/*if may laman yung $stmt = ieexecute niya yon (SELECT)*/					
                     mysqli_stmt_store_result($stmt);							/*iniistore niya dito yung results*/
                     if(mysqli_stmt_num_rows($stmt) == 1){						/*irereturn niya yung number of rows sa select at kapag equals sa isa*/
-                        mysqli_stmt_bind_result($stmt, $id, $first_name, $middle_name, $last_name, $username, $hashed_password, $gender, $address);		/*ilalagay niya yung result sa variables*/
+                        mysqli_stmt_bind_result($stmt, $id, $first_name, $middle_name, $last_name, $username, $hashed_password, $gender, $user_type);		/*ilalagay niya yung result sa variables*/
                         if(mysqli_stmt_fetch($stmt)){								/*siyempre kailangan kunin, kaya fetch*/
-                                if(password_verify($password, $hashed_password)){	/*if true yung password == hashed password*/
+                                if (password_verify($password, $hashed_password)){  /*if true yung password == hashed password*/
                                     $_SESSION['logged_in'] = true;					/*gagawin niya to*/ /*session pwedeng magamit hanggang mag log out*/
                                     if($user_type == 2){
                                         $_SESSION['faculty'] = true;
@@ -80,7 +80,7 @@
                                     header("location: generalannouncements.php");				/*pupunta siya dito pagkatapos*/
                                 }
                                 else{								
-                                    $login_err = "Invalid email address or password1";		/*kung hindi tama yung password, eto yung lalabas*/
+                                    $login_err = "Mali password mo pre";		/*kung hindi tama yung password, eto yung lalabas*/
                                 }
                         }
                     }
