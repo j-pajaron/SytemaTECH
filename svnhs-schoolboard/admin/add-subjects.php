@@ -204,7 +204,85 @@
 	</div>
 
 	<!-- white na container sa gitna -->
-	<div id="white_container_body"></div>
+	<div id="white_container_body">
+		Grades
+		<?php $qry = "SELECT * FROM subjects WHERE deleted IS NULL"; ?>
+		<?php if($result = mysqli_query($link, $qry)): ?>
+		<?php if(mysqli_num_rows($result) > 0): ?> 
+
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Subject</th>
+					<th scope="col">Description</th>
+					<th scope="col">Time</th>
+					<th scope="col">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$i=0;
+					$j=1;
+					while($rows = mysqli_fetch_array($result)):
+				?>
+				<tr>
+					<?php 
+						$i++;
+					?>
+					<td classs="text-center">
+						<?php
+							echo $j++;
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["name"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["description"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["start_time"]
+						?>
+						-
+						<?=
+							$rows["end_time"]
+						?>
+					</td>
+					<td>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href=""></a>
+							<a class="dropdown-item" href=""></a>
+						</div>
+					</td>
+				</tr>
+			<?php 
+				endwhile; 
+			?>
+			</tbody>
+		</table>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>No records found.</em></div>
+		<?php
+			endif;
+		?>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+		<?php
+			endif;
+		?>
+	</div>
 
 	<!-- Additional Content -->
 	<div id="additional_container_body">
