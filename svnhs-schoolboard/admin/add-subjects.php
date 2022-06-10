@@ -183,23 +183,23 @@
 		<div class="announcement_body"></div>
 		<div class="announcement_text">
 			<b>Add subject</b><br>
-		</div>
-		<div class = "col-md-12">
-			<form method="post" action = "file-upload-subjects.php" enctype="multipart/form-data">
-				<div class ="form-group row">
-					<label class = "col-md-3">Select File</label>
-					<div class="col-md-8"></div>
-					<input type="file" name = "uploadfile" class="form-control">
-					</div>
-					</div>
 
+			<div class = "col-md-12">
+				<form method="post" action = "file-upload-subjects.php" enctype="multipart/form-data">
 					<div class ="form-group row">
-						<label class = "col-md-3"></label>
-						<div class="col-md-8">
-							<input type="submit" name = "submit" class = "btn btn-primary">
+						<label class = "col-md-12"><font style="font-size: 20px;">Select File</font></label>
+						<div class="col-md-8"></div>
+						<input type="file" name = "uploadfile" class="form-control">
 						</div>
-					</div>
-			</form>
+						</div>
+
+						<div class ="form-group row">
+							<div class="col-md-4">
+								<input type="submit" name = "submit" class = "btn btn-primary">
+							</div>
+						</div>
+				</form>
+			</div>
 		</div>
 	</div>
 
