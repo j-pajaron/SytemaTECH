@@ -15,6 +15,60 @@
 
     require_once('../config.php');
 ?>
+<?php
+
+    	if(isset($_POST['button1'])) {
+    		$time = time();
+            $sql = "UPDATE announcements SET time_posted = $time, date_posted = CURRENT_TIMESTAMP,  approval = 2, updated_at = CURRENT_TIMESTAMP";
+	       	if(mysqli_query($link,$sql)){
+	           	echo "<script type=\"text/javascript\">
+                        alert(\"Announcement has been approved.\");
+                        window.location = \"generalannouncements.php\"
+                    </script>";
+	        }
+	        else{
+	          	echo "error";
+	        }
+        }
+
+        if(isset($_POST['button2'])) {
+            $sql = "UPDATE announcements SET approval = 3, updated_at = CURRENT_TIMESTAMP";
+	       	if(mysqli_query($link,$sql)){
+	           	echo "<script type=\"text/javascript\">
+                        alert(\"Announcement has been rejected.\");
+                        window.location = \"generalannouncements.php\"
+                    </script>";
+	        }
+	        else{
+	          	echo "error";
+	        }
+        }
+
+        if(isset($_POST['button3'])) {
+            $sql = "UPDATE announcements SET approval = 4, updated_at = CURRENT_TIMESTAMP";
+	       	if(mysqli_query($link,$sql)){
+	           	echo "<script type=\"text/javascript\">
+                        alert(\"Announcement needs a follow up.\");
+                        window.location = \"generalannouncements.php\"
+                    </script>";
+	        }
+	        else{
+	          	echo "error";
+	        }
+        }
+
+    /*	else if(array_key_exists('action4', $_POST)){
+	    	$sql = "UPDATE announcements SET approval = 4, updated_at = CURRENT_TIMESTAMP";
+	       	if(mysql_query($link,$sql)){
+	           	header('location: generalannouncements.php');
+	          	exit(); 
+	        }
+	        else{
+	          	echo "error";
+	        }
+    	}*/
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +169,7 @@
 			padding-left: 12px;
 			padding-right: 12px;
 			text-align: center;
-			font-size: 60px;
+			font-size: 15px;
 			margin-top: -900px;
 			margin-left: 450px;
 			margin-right: 450px;
@@ -182,7 +236,96 @@
 	<div id="announcement_container_body" >
 		<div class="announcement_body"></div>
 		<div class="announcement_text">
-			<b>Announcements</b><br>
+			<h1><b>Approved Announcements</b></h1><br>
+			<br><br><br>
+			<?php $qry = "SELECT * FROM announcements WHERE deleted IS NULL AND approval = 2"; ?>
+			<?php if($result = mysqli_query($link, $qry)): ?>
+			<?php if(mysqli_num_rows($result) > 0): ?> 
+
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">What</th>
+						<th scope="col">When</th>
+						<th scope="col">Where</th>
+						<th scope="col">Content</th>
+						<th scope="col">Posted:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						$i=0;
+						$j=1;
+						while($rows = mysqli_fetch_array($result)):
+					?>
+					<tr>
+						<?php 
+							$i++;
+						?>
+						<td classs="text-center">
+							<?php
+								echo $j++;
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["what"]
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["when_date"]
+							?>
+								at
+							<?=
+								$rows["when_time"]
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["location"]
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["content"]
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["time_posted"]
+							?>
+							at
+							<?=
+								$rows["date_posted"]
+							?>
+						</td>
+					</tr>
+				<?php 
+					endwhile; 
+				?>
+				</tbody>
+			</table>
+			<?php
+				else:
+			?>
+				<br><br>
+				<div class="alert alert-danger"><em>No records found.</em></div>
+			<?php
+				endif;
+			?>
+			<?php
+				else:
+			?>
+				<br><br>
+				<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+			<?php
+				endif;
+			?>
+		</div>
+
+	</div>
 		</div>
 	</div>
 
@@ -250,9 +393,11 @@
 								<b>...</b>
 							</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="">Approve</a>
-								<a class="dropdown-item" href="">Reject</a>
-								<a class="dropdown-item" href="">Follow Up</a>
+								<form method="post">
+							        <input type="submit" name="button1" value="Approve"></input>
+							        <input type="submit" name="button2" value="Reject"></input>
+							        <input type="submit" name="button3" value="Follow Up"></input>
+							    </form>
 							</div>
 						</div>
 					</td>
