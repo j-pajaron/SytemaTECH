@@ -173,7 +173,9 @@
 			<li><a class="active" href="#generalannouncements">General Announcement</a></li>
 			<li><a href="grades.php">Grades</a></li>
 			<li><a href="documentrequest.php">Document Request</a></li>
-			<li><a href="profile.php">Profile</a></li>	
+			<li><a href="profile.php">Profile</a></li>
+			<li><a href="add-subjects.php">Add Subjects</a></li>
+			<li><a href="register-users.php">Register Users</a></li>
 		</ul>
 	</div>
 	<!-- announcements -->
@@ -185,7 +187,100 @@
 	</div>
 
 	<!-- white na container sa gitna -->
-	<div id="white_container_body"></div>
+	<div id="white_container_body">
+		<h3><center>Announcements to be approved</center></h3>
+		<br><br><br>
+		<?php $qry = "SELECT * FROM announcements WHERE deleted IS NULL AND approval = 1"; ?>
+		<?php if($result = mysqli_query($link, $qry)): ?>
+		<?php if(mysqli_num_rows($result) > 0): ?> 
+
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">What</th>
+					<th scope="col">When</th>
+					<th scope="col">Where</th>
+					<th scope="col">Content</th>
+					<th scope="col">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$i=0;
+					$j=1;
+					while($rows = mysqli_fetch_array($result)):
+				?>
+				<tr>
+					<?php 
+						$i++;
+					?>
+					<td classs="text-center">
+						<?php
+							echo $j++;
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["what"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["when_date"]
+						?>
+							at
+						<?=
+							$rows["when_time"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["location"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["content"]
+						?>
+					</td>
+					<td>
+						<div class="dropdown">
+							<a class="dropdown-toggle" role="button" data-toggle="dropdown">
+								<b>...</b>
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="">Approve</a>
+								<a class="dropdown-item" href="">Reject</a>
+								<a class="dropdown-item" href="">Follow Up</a>
+							</div>
+						</div>
+					</td>
+				</tr>
+			<?php 
+				endwhile; 
+			?>
+			</tbody>
+		</table>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>No records found.</em></div>
+		<?php
+			endif;
+		?>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+		<?php
+			endif;
+		?>
+	</div>
+
+	</div>
 
 	<!-- Additional Content -->
 	<div id="additional_container_body">
