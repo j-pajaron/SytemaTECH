@@ -112,10 +112,10 @@
 
 		.announcement_text{					/*yung text sa announcemets*/
 			padding-top: 100px;
-			padding-left: 12px;
-			padding-right: 12px;
+			padding-left: 22px;
+			padding-right: 22px;
 			text-align: center;
-			font-size: 60px;
+			font-size: 14px;
 			margin-top: -900px;
 			margin-left: 450px;
 			margin-right: 450px;
@@ -182,29 +182,180 @@
 	<div id="announcement_container_body" >
 		<div class="announcement_body"></div>
 		<div class="announcement_text">
-			<b>Add subject</b><br>
-		</div>
-		<div class = "col-md-12">
-			<form method="post" action = "file-upload-users.php" enctype="multipart/form-data">
-				<div class ="form-group row">
-					<label class = "col-md-3">Select File</label>
-					<div class="col-md-8"></div>
-					<input type="file" name = "uploadfile" class="form-control">
-					</div>
-					</div>
-
+			<h1><b>Add Users</b><br></h1>
+			<div class = "col-md-12">
+				<form method="post" action = "file-upload-users.php" enctype="multipart/form-data">
 					<div class ="form-group row">
-						<label class = "col-md-3"></label>
-						<div class="col-md-8">
-							<input type="submit" name = "submit" class = "btn btn-primary">
+						<label class = "col-md-3">Select File</label>
+						<div class="col-md-8"></div>
+						<input type="file" name = "uploadfile" class="form-control">
 						</div>
-					</div>
-			</form>
+						</div>
+						<div class ="form-group row">
+							<br><br><br>
+							<label class = "col-md-1"></label>
+							<div class="col-md-2">
+								<input type="submit" name = "submit" class = "btn btn-primary">
+							</div>
+						</div>
+				</form>
+			</div>
 		</div>
 	</div>
 
 	<!-- white na container sa gitna -->
-	<div id="white_container_body"></div>
+	<div id="white_container_body">
+		<center><h1>Teachers</h1></center>
+		<?php $qry = "SELECT * FROM users WHERE deleted IS NULL AND user_type = 2"; ?>
+		<?php if($result = mysqli_query($link, $qry)): ?>
+		<?php if(mysqli_num_rows($result) > 0): ?> 
+
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Gender</th>
+					<th scope="col">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$i=0;
+					$j=1;
+					while($rows = mysqli_fetch_array($result)):
+				?>
+				<tr>
+					<?php 
+						$i++;
+					?>
+					<td classs="text-center">
+						<?php
+							echo $j++;
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["last_name"]
+						?>
+						, 
+						<?=
+							$rows["first_name"]
+						?>
+						<?=
+							$rows["middle_name"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["gender"]
+						?>
+					</td>
+					<td>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href=""></a>
+							<a class="dropdown-item" href=""></a>
+						</div>
+					</td>
+				</tr>
+			<?php 
+				endwhile; 
+			?>
+			</tbody>
+		</table>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>No records found.</em></div>
+		<?php
+			endif;
+		?>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+		<?php
+			endif;
+		?>
+
+		<br><br><br><br><br><br>
+		<center><h1>Students</h1></center>
+		<?php $qry = "SELECT * FROM users WHERE deleted IS NULL AND user_type = 1"; ?>
+		<?php if($result = mysqli_query($link, $qry)): ?>
+		<?php if(mysqli_num_rows($result) > 0): ?> 
+
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Gender</th>
+					<th scope="col">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$i=0;
+					$j=1;
+					while($rows = mysqli_fetch_array($result)):
+				?>
+				<tr>
+					<?php 
+						$i++;
+					?>
+					<td classs="text-center">
+						<?php
+							echo $j++;
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["last_name"]
+						?>
+						, 
+						<?=
+							$rows["first_name"]
+						?>
+						<?=
+							$rows["middle_name"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["gender"]
+						?>
+					</td>
+					<td>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href=""></a>
+							<a class="dropdown-item" href=""></a>
+						</div>
+					</td>
+				</tr>
+			<?php 
+				endwhile; 
+			?>
+			</tbody>
+		</table>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>No records found.</em></div>
+		<?php
+			endif;
+		?>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+		<?php
+			endif;
+		?>
+	</div>
 
 	<!-- Additional Content -->
 	<div id="additional_container_body">
