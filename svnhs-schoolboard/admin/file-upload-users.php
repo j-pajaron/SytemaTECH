@@ -30,7 +30,7 @@ if(isset($_POST["submit"])){
              while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
              {
                 $options = ['cost' => 12];
-                $salt = '1111111111111111';
+                $salt = 'zzzzzzzzzzzzzzzzzzzz';
                 $hashed_password = password_hash($salt.$emapData[5], PASSWORD_BCRYPT, $options);
               //It wiil insert a row to our subject table from our csv file`
                $sql = "INSERT into users (`first_name`, `middle_name`, `last_name`, `username`, `password`, `gender`, `user_type`) 
