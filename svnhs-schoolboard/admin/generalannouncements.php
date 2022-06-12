@@ -323,7 +323,7 @@
 		</ul>
 	</div>
 
-	<!-- Additional Content -->
+	<!-- Create Announcement -->
 	<div id="additional_container_body">
 		<div class="additional_body"></div>
 		<div class="additional_white">
