@@ -70,7 +70,7 @@
 		  	height: 100px;
 		  	padding-top: 50px;
 		  	z-index: 1;
-		  	margin-left:1200px;
+		  	margin-left:900px;
 		}
 
 		li{									/*para nakaline yung mga choices*/

@@ -17,19 +17,19 @@
 ?>
 <?php
 
-if(isset($_POST["submit"])){
+if(isset($_POST["submit"])){                                    /*pagpinindot yung submit sa file-upload*/
+            
+
+        echo $filename=$_FILES["uploadfile"]["tmp_name"];               /*_files temporary file name. Where file is stored*/
         
 
-        echo $filename=$_FILES["uploadfile"]["tmp_name"];
-        
-
-         if($_FILES["uploadfile"]["size"] > 0)
+         if($_FILES["uploadfile"]["size"] > 0)                          /*size ng file is > 0*/
          {
 
-            $file = fopen($filename, "r");
-             while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
-             {
-        
+            $file = fopen($filename, "r");                  /*fileopen (filename, r(read-only))*/
+             while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)     /*parses a line from an open file: fgetcsv(file, length, separator)*/
+             {                                                              /*hanggat may laman yung file, ilalagay niya yung  value niya sa emapdata isa-isa*/
+                                                                            
               //It wiil insert a row to our subject table from our csv file`
                $sql = "INSERT into subjects (`name`, `description`, `start_time`, `end_time`) 
                     values('$emapData[1]','$emapData[2]','$emapData[3]','$emapData[4]')";
@@ -45,7 +45,7 @@ if(isset($_POST["submit"])){
                 }
 
              }
-             fclose($file);
+             fclose($file);                 /*fileclose*/
              //throws a message if data successfully imported to mysql database from excel file
              echo "<script type=\"text/javascript\">
                         alert(\"CSV File has been successfully Imported.\");

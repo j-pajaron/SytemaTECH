@@ -17,6 +17,8 @@
 ?>
 <?php
 
+		/*start - for accepting announcement*/
+
     	if(isset($_POST['button1'])) {
     		$time = time();
             $sql = "UPDATE announcements SET time_posted = $time, date_posted = CURRENT_TIMESTAMP,  approval = 2, updated_at = CURRENT_TIMESTAMP";
@@ -57,16 +59,80 @@
 	        }
         }
 
-    /*	else if(array_key_exists('action4', $_POST)){
-	    	$sql = "UPDATE announcements SET approval = 4, updated_at = CURRENT_TIMESTAMP";
-	       	if(mysql_query($link,$sql)){
-	           	header('location: generalannouncements.php');
-	          	exit(); 
-	        }
-	        else{
-	          	echo "error";
-	        }
-    	}*/
+        /* end - for accepting announcement*/
+
+
+        /*start - for creating announcement*/
+
+        $whatErr = "";
+        $whenErr = "";
+        $whereErr = "";
+        $contentErr = "";
+        $incomplete_data = "";
+        
+        $what = "";
+        $when = "";
+        $where = "";
+        $content = "";
+
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        	function clean_data($data){
+        		$data = trim($data);					/*   abc     */
+        		$data = stripslashes($data);			/* abc/def/gfh/ */
+        		$data = htmlspecialchars($data);		/*<br><div>*/
+        		return $data;
+        	}
+
+
+        	if(empty($_POST['what'])){
+        		$whatErr = "*Subject is required.";
+        	}
+        	else{
+        		$what = clean_data($_POST['what']);
+        	}
+
+        	if(empty($_POST['when'])){
+        		$whenErr = "*Date is required.";
+        	}
+        	else{
+        		$when = clean_data($_POST['when']);
+        	}
+
+        	if(empty($_POST['where'])){
+        		$whereErr = "*Place is required.";
+        	}
+        	else{
+        		$where = clean_data($_POST['where']);
+        	}
+
+        	if(empty($_POST['content'])){
+        		$contentErr = "*Description is required.";
+        	}
+        	else{
+        		$content = clean_data($_POST['content']);
+        	}
+
+
+        	if(empty($what) || empty($when) || empty($where) || empty($content)){
+        		$incomplete_data = "Please input required data";
+        	}
+        	else{
+        		$sql = "INSERT INTO announcements (what, location, content) VALUES ('$what', '$where', '$content')";
+        		if(mysqli_query($link,$sql)){			/*nageexecute ng query*/
+        			echo "<script type=\"text/javascript\">
+                        alert(\"Your Announcement is waiting for approval.\");
+                        window.location = \"generalannouncements.php\"
+                    </script>";
+        		}
+        		else{
+        			echo "Error: ".$sql. " ".mysqli_error($conn);
+        		}
+        	}
+
+        }
+
+        /*end - for creating annoucement*/
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +190,7 @@
 		  	height: 100px;
 		  	padding-top: 50px;
 		  	z-index: 1;
-		  	margin-left:1200px;
+		  	margin-left:900px;
 		}
 
 		li{									/*para nakaline yung mga choices*/
@@ -194,6 +260,18 @@
 			opacity: 0.6;
 			z-index: -5;
 			position: relative;
+		}
+
+		.additional_text{					/*yung text sa addtional-body*/
+			padding-top: 100px;
+			padding-left: 12px;
+			padding-right: 12px;
+			text-align: center;
+			font-size: 15px;
+			margin-top: -900px;
+			margin-left: 450px;
+			margin-right: 450px;
+			color: red;
 		}
 
 	</style>
@@ -429,8 +507,42 @@
 
 	<!-- Additional Content -->
 	<div id="additional_container_body">
-		<div class="additional_body">
-			
+		<div class="additional_body"></div>
+		<div class="additional_text">
+			<h1><b>Create Announcements</b></h1><br>
+			<div>
+				<p><span class = "error">* required field</span></p>
+				<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+					<table>
+						<tr>
+							<td><span class="error">*</span>WHAT:</td>
+							<td>
+								<input type="text" name="what"><br/><span class="error"><?php echo $whatErr;?></span>
+							</td>
+						</tr>
+						<tr>
+							<td><span class="error">*</span>WHEN:</td>
+							<td>
+								<input type="text" name="when"><br/><span class="error"><?php echo $whenErr;?></span>
+							</td>
+						</tr>
+						<tr>
+							<td><span class="error">*</span>WHERE:</td>
+							<td><input type="text" name="where"><br/><span class="error"><?php echo $whereErr;?></span></td>
+						</tr>
+						<tr>
+							<td><span class="error">*</span>DESCRIPTION:</td>
+								<td><textarea name="content" rows="5" cols="40"></textarea><br/><span class="error"><?php echo $contentErr;?></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="submit" name="submit" value="submit"><br/><span class="error"><?php echo $incomplete_data;?></span>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
 	</div>
 

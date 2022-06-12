@@ -70,7 +70,7 @@
 		  	height: 100px;
 		  	padding-top: 50px;
 		  	z-index: 1;
-		  	margin-left:1200px;
+		  	margin-left:900px;
 		}
 
 		li{									/*para nakaline yung mga choices*/
@@ -170,7 +170,7 @@
 	</div>
 	<div class="green_header">
 		<ul>
-			<li><a href = "generalannouncements.php";>General Announcement</a></li>
+			<li><a href="generalannouncements.php">General Announcement</a></li>
 			<li><a href="grades.php">Grades</a></li>
 			<li><a href="documentrequest.php">Document Request</a></li>
 			<li><a href="profile.php">Profile</a></li>
