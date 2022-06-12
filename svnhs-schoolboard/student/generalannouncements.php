@@ -293,6 +293,7 @@
 				endif;
 			?>
 		</div>
+	</div>
 
 
 	<!-- white na container sa gitna -->
