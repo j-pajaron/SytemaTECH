@@ -1,3 +1,10 @@
+<?php
+	
+	require_once('../config.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,12 +105,13 @@
 			padding-left: 12px;
 			padding-right: 12px;
 			text-align: center;
-			font-size: 60px;
+			font-size: 15px;
 			margin-top: -900px;
 			margin-left: 450px;
 			margin-right: 450px;
 			color: white;
 		}
+
 
 		#white_container_body{				/*Container na white*/
 			background-color: white;
@@ -123,6 +131,30 @@
 			opacity: 0.6;
 			z-index: -5;
 			position: relative;
+		}
+
+		.additional_white{					/*yung white sa create announcement*/
+			background-color: white;
+			height: 600px;
+			margin-top: 200px;
+			margin-left: 480px;
+			margin-right: 480px;
+			position: relative;
+		}
+
+		.additional_text{					/*yung text sa addtional-body*/
+			padding-top: 60px;
+			padding-left: 16px;
+			padding-right: 16px;
+			font-size: 15px;
+			margin-top: -900px;
+		}
+
+		.footer{							/*footer mismo*/
+			background-color: white;
+			text-align: center;
+			height: 60px;
+			padding-top: 20px;
 		}
 
 	</style>
@@ -162,13 +194,101 @@
 			<li><a href="../login.php">Log In</a></li>
 		</ul>
 	</div>
+
 	<!-- announcements -->
 	<div id="announcement_container_body" >
 		<div class="announcement_body"></div>
 		<div class="announcement_text">
-			<b>Announcements</b><br>
+			<h1><b>Approved Announcements</b></h1><br>
+			<br><br><br>
+			<?php $qry = "SELECT * FROM announcements WHERE deleted IS NULL AND approval = 2"; ?>
+			<?php if($result = mysqli_query($link, $qry)): ?>
+			<?php if(mysqli_num_rows($result) > 0): ?> 
+
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">What</th>
+						<th scope="col">When</th>
+						<th scope="col">Where</th>
+						<th scope="col">Content</th>
+						<th scope="col">Posted:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						$i=0;
+						$j=1;
+						while($rows = mysqli_fetch_array($result)):
+					?>
+					<tr>
+						<?php 
+							$i++;
+						?>
+						<td classs="text-center">
+							<?php
+								echo $j++;
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["what"]
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["when_date"]
+							?>
+								at
+							<?=
+								$rows["when_time"]
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["location"]
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["content"]
+							?>
+						</td>
+						<td>
+							<?=
+								$rows["time_posted"]
+							?>
+							at
+							<?=
+								$rows["date_posted"]
+							?>
+						</td>
+					</tr>
+				<?php 
+					endwhile; 
+				?>
+				</tbody>
+			</table>
+			<?php
+				else:
+			?>
+				<br><br>
+				<div class="alert alert-danger"><em>No records found.</em></div>
+			<?php
+				endif;
+			?>
+			<?php
+				else:
+			?>
+				<br><br>
+				<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+			<?php
+				endif;
+			?>
 		</div>
 	</div>
+
 
 	<!-- white na container sa gitna -->
 	<div id="white_container_body"></div>
@@ -180,7 +300,10 @@
 		</div>
 	</div>
 
-
+	<div class="before_footer"></div>
+	<footer class="footer">
+		2022 - All rights reserved
+	</footer>
 
 </body>
 </html>

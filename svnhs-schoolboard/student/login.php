@@ -2,8 +2,8 @@
     session_start();                /*para masave yung information hanngang isara yung browser*/
 
     if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){                           /*kapag nakalogin na sila*/
-        if(isset($_SESSION["admin"]) && $_SESSION['admin'] === true){                                /*at user yung nakalogin*/
-            header("location: ../student/generalannouncements.php");                                        /*mapupunta dito si admin*/    
+        if(isset($_SESSION["admin"]) && $_SESSION['admin'] === true){                                /*at admin yung nakalogin*/
+            header("location: ../admin/generalannouncements.php");                                        /*mapupunta dito si admin*/    
             exit();
         }
     }
@@ -15,7 +15,7 @@
         }
     }
 
-    else if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){            /*kapag admin naman nakalogin*/
+    else if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){            /*kapag user naman nakalogin*/
         header("location: generalannouncements.php");                                      /*hindi na siya pwedeng pumunta sa login page*/
     }
 
