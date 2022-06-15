@@ -149,6 +149,9 @@
 
 	<div id="profile_container_body">
 		<b>Profile Information</b>
+		<div class = "col-1">
+			<a href="../logout.php" class="btn btn-danger">Logout</a> 
+		</div>
 		<hr>
 	</div>
 	<div id="profile_data_body">

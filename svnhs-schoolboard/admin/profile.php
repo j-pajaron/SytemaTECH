@@ -62,7 +62,7 @@
 		  	height: 100px;
 		  	padding-top: 50px;
 		  	z-index: 1;
-		  	margin-left: 1200px;
+		  	margin-left: 900px;
 		}
 
 		li{									/*para nakaline yung mga choices*/
@@ -141,6 +141,8 @@
 			<li><a href="grades.php">Grades</a></li>
 			<li><a href="documentrequest.php">Document Request</a></li>
 			<li><a class="active" href="#profile">Profile</a></li>	
+			<li><a href="add-subjects.php">Add Subjects</a></li>
+			<li><a href="register-users.php">Register Users</a></li>
 		</ul>
 	</div>
 	<br><br><br><br><br><br><br><br>
@@ -148,11 +150,12 @@
 
 	<div id="profile_container_body">
 		<b>Profile Information</b>
+		<div class = "col-1">
+			<a href="../logout.php" class="btn btn-danger">Logout</a> 
+		</div>
 		<hr>
 	</div>
-	<a href="../logout.php" class="btn btn-danger">Logout</a> 
 	<div id="profile_data_body">
-		
 	</div>
 
 	<br><br><br><br>

@@ -58,7 +58,7 @@
                     if(mysqli_stmt_num_rows($stmt) == 1){						/*irereturn niya yung number of rows sa select at kapag equals sa isa*/
                         mysqli_stmt_bind_result($stmt, $id, $first_name, $middle_name, $last_name, $username, $hashed_password, $gender, $user_type);		/*ilalagay niya yung result sa variables*/
                         if(mysqli_stmt_fetch($stmt)){								/*siyempre kailangan kunin, kaya fetch*/
-                                if(password_verify($password, $hashed_password)){	/*if true yung password == hashed password*/
+                                if (password_verify($password, $hashed_password)){	/*if true yung password == hashed password*/
                                     $_SESSION['logged_in'] = true;					/*gagawin niya to*/  /*session pwedeng magamit hanggang mag log out*/
                                     if($user_type == 2){
                                         $_SESSION['faculty'] = true;

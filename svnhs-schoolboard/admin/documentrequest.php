@@ -62,7 +62,7 @@
 		  	height: 100px;
 		  	padding-top: 50px;
 		  	z-index: 1;
-		  	margin-left: 1200px;
+		  	margin-left: 900px;
 		}
 
 		li{									/*para nakaline yung mga choices*/
@@ -139,8 +139,10 @@
 		<ul>
 			<li><a href="generalannouncements.php">General Announcement</a></li>
 			<li><a href="grades.php">Grades</a></li>
-			<li><a class="active" href="#documentrequest">Document Request</a></li>
-			<li><a href="profile.php">Profile</a></li>	
+			<li><a href="active" href="#documentrequest">Document Request</a></li>
+			<li><a href="profile.php">Profile</a></li>
+			<li><a href="add-subjects.php">Add Subjects</a></li>
+			<li><a href="register-users.php">Register Users</a></li>
 		</ul>
 	</div>
 	<br><br><br><br><br><br><br><br>

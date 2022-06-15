@@ -1,10 +1,20 @@
 <?php
-	
-	require_once('../config.php');
+	session_start();																			/*para masave yung information hanngang isara yung browser*/
 
+	if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true){		/*kapag hindi ka nakalogin, labas*/
+    	header("location: ../landing/generalannouncements.php");
+    	exit();
+	}
+
+	if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){                           /*kapag nakalogin na sila*/
+        if(!isset($_SESSION["admin"]) && $_SESSION['admin'] !== true){                               /*pero hindi sila admin, labas pa rin*/
+            header("location: ../landing/generalannouncements.php");                                    
+            exit();
+        }
+    }
+
+    require_once('../config.php');
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,13 +115,12 @@
 			padding-left: 12px;
 			padding-right: 12px;
 			text-align: center;
-			font-size: 15px;
+			font-size: 60px;
 			margin-top: -900px;
 			margin-left: 450px;
 			margin-right: 450px;
 			color: white;
 		}
-
 
 		#white_container_body{				/*Container na white*/
 			background-color: white;
@@ -131,30 +140,6 @@
 			opacity: 0.6;
 			z-index: -5;
 			position: relative;
-		}
-
-		.additional_white{					/*yung white sa create announcement*/
-			background-color: white;
-			height: 600px;
-			margin-top: 200px;
-			margin-left: 480px;
-			margin-right: 480px;
-			position: relative;
-		}
-
-		.additional_text{					/*yung text sa addtional-body*/
-			padding-top: 60px;
-			padding-left: 16px;
-			padding-right: 16px;
-			font-size: 15px;
-			margin-top: -900px;
-		}
-
-		.footer{							/*footer mismo*/
-			background-color: white;
-			text-align: center;
-			height: 60px;
-			padding-top: 20px;
 		}
 
 	</style>
@@ -185,113 +170,119 @@
 	</div>
 	<div class="green_header">
 		<ul>
-			<li><a href="about.php">About</a></li>
-			<li><a class="active" href="#generalannouncements">General Announcement</a></li>
-			<li><a href="events.php">Events</a></li>
-			<li><a href="enrolmentreport.php">Enrollment Reports</a></li>
-			<li><a href="faculty.php">Faculty</a></li>
-			<li><a href="courses.php">Courses</a></li>
-			<li><a href="../login.php">Log In</a></li>
+			<li><a href = "generalannouncements.php";>General Announcement</a></li>
+			<li><a href="grades.php">Grades</a></li>
+			<li><a href="documentrequest.php">Document Request</a></li>
+			<li><a href="profile.php">Profile</a></li>
+			<li><a class="active" href="#add-subjects">Add Subjects</a></li>
+			<li><a href="register-users.php">Register Users</a></li>
 		</ul>
 	</div>
-
 	<!-- announcements -->
 	<div id="announcement_container_body" >
 		<div class="announcement_body"></div>
 		<div class="announcement_text">
-			<h1><b>Approved Announcements</b></h1><br>
-			<br><br><br>
-			<?php $qry = "SELECT * FROM announcements WHERE deleted IS NULL AND approval = 2"; ?>
-			<?php if($result = mysqli_query($link, $qry)): ?>
-			<?php if(mysqli_num_rows($result) > 0): ?> 
+			<b>Add subject</b><br>
 
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">What</th>
-						<th scope="col">When</th>
-						<th scope="col">Where</th>
-						<th scope="col">Content</th>
-						<th scope="col">Posted:</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-						$i=0;
-						$j=1;
-						while($rows = mysqli_fetch_array($result)):
-					?>
-					<tr>
-						<?php 
-							$i++;
-						?>
-						<td classs="text-center">
-							<?php
-								echo $j++;
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["what"]
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["when_date"]
-							?>
-								at
-							<?=
-								$rows["when_time"]
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["location"]
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["content"]
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["time_posted"]
-							?>
-							at
-							<?=
-								$rows["date_posted"]
-							?>
-						</td>
-					</tr>
-				<?php 
-					endwhile; 
-				?>
-				</tbody>
-			</table>
-			<?php
-				else:
-			?>
-				<br><br>
-				<div class="alert alert-danger"><em>No records found.</em></div>
-			<?php
-				endif;
-			?>
-			<?php
-				else:
-			?>
-				<br><br>
-				<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
-			<?php
-				endif;
-			?>
+			<div class = "col-md-12">
+				<form method="post" action = "file-upload-subjects.php" enctype="multipart/form-data">
+					<div class ="form-group row">
+						<label class = "col-md-12"><font style="font-size: 20px;">Select File</font></label>
+						<div class="col-md-8"></div>
+						<input type="file" name = "uploadfile" class="form-control">
+						</div>
+						</div>
+
+						<div class ="form-group row">
+							<div class="col-md-4">
+								<input type="submit" name = "submit" class = "btn btn-primary">
+							</div>
+						</div>
+				</form>
+			</div>
 		</div>
 	</div>
 
-
 	<!-- white na container sa gitna -->
-	<div id="white_container_body"></div>
+	<div id="white_container_body">
+		Grades
+		<?php $qry = "SELECT * FROM subjects WHERE deleted IS NULL"; ?>
+		<?php if($result = mysqli_query($link, $qry)): ?>
+		<?php if(mysqli_num_rows($result) > 0): ?> 
+
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Subject</th>
+					<th scope="col">Description</th>
+					<th scope="col">Time</th>
+					<th scope="col">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$i=0;
+					$j=1;
+					while($rows = mysqli_fetch_array($result)):
+				?>
+				<tr>
+					<?php 
+						$i++;
+					?>
+					<td classs="text-center">
+						<?php
+							echo $j++;
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["name"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["description"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["start_time"]
+						?>
+						-
+						<?=
+							$rows["end_time"]
+						?>
+					</td>
+					<td>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href=""></a>
+							<a class="dropdown-item" href=""></a>
+						</div>
+					</td>
+				</tr>
+			<?php 
+				endwhile; 
+			?>
+			</tbody>
+		</table>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>No records found.</em></div>
+		<?php
+			endif;
+		?>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+		<?php
+			endif;
+		?>
+	</div>
 
 	<!-- Additional Content -->
 	<div id="additional_container_body">
@@ -300,10 +291,7 @@
 		</div>
 	</div>
 
-	<div class="before_footer"></div>
-	<footer class="footer">
-		2022 - All rights reserved
-	</footer>
+
 
 </body>
 </html>

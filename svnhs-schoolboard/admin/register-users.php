@@ -1,5 +1,5 @@
 <?php
-	session_start();			/*para masave yung information hanngang isara yung browser*/
+	session_start();																			/*para masave yung information hanngang isara yung browser*/
 
 	if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true){		/*kapag hindi ka nakalogin, labas*/
     	header("location: ../landing/generalannouncements.php");
@@ -7,7 +7,7 @@
 	}
 
 	if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){                           /*kapag nakalogin na sila*/
-        if(!isset($_SESSION["user"]) && $_SESSION['user'] !== true){                               /*pero hindi sila admin, labas pa rin*/
+        if(!isset($_SESSION["admin"]) && $_SESSION['admin'] !== true){                               /*pero hindi sila admin, labas pa rin*/
             header("location: ../landing/generalannouncements.php");                                    
             exit();
         }
@@ -15,7 +15,6 @@
 
     require_once('../config.php');
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +70,7 @@
 		  	height: 100px;
 		  	padding-top: 50px;
 		  	z-index: 1;
-		  	margin-left:1200px;
+		  	margin-left:900px;
 		}
 
 		li{									/*para nakaline yung mga choices*/
@@ -113,10 +112,10 @@
 
 		.announcement_text{					/*yung text sa announcemets*/
 			padding-top: 100px;
-			padding-left: 12px;
-			padding-right: 12px;
+			padding-left: 22px;
+			padding-right: 22px;
 			text-align: center;
-			font-size: 15px;
+			font-size: 14px;
 			margin-top: -900px;
 			margin-left: 450px;
 			margin-right: 450px;
@@ -141,30 +140,6 @@
 			opacity: 0.6;
 			z-index: -5;
 			position: relative;
-		}
-
-		.additional_white{					/*yung white sa create announcement*/
-			background-color: white;
-			height: 600px;
-			margin-top: 200px;
-			margin-left: 480px;
-			margin-right: 480px;
-			position: relative;
-		}
-
-		.additional_text{					/*yung text sa addtional-body*/
-			padding-top: 60px;
-			padding-left: 16px;
-			padding-right: 16px;
-			font-size: 15px;
-			margin-top: -900px;
-		}
-
-		.footer{							/*footer mismo*/
-			background-color: white;
-			text-align: center;
-			height: 60px;
-			padding-top: 20px;
 		}
 
 	</style>
@@ -195,109 +170,192 @@
 	</div>
 	<div class="green_header">
 		<ul>
-			<li><a class="active" href="#generalannouncements">General Announcement</a></li>
+			<li><a href="generalannouncements.php">General Announcement</a></li>
 			<li><a href="grades.php">Grades</a></li>
 			<li><a href="documentrequest.php">Document Request</a></li>
-			<li><a href="profile.php">Profile</a></li>	
+			<li><a href="profile.php">Profile</a></li>
+			<li><a href="add-subjects.php">Add Subjects</a></li>
+			<li><a class="active" href="#register-users">Register Users</a></li>
 		</ul>
 	</div>
 	<!-- announcements -->
 	<div id="announcement_container_body" >
 		<div class="announcement_body"></div>
 		<div class="announcement_text">
-			<h1><b>Approved Announcements</b></h1><br>
-			<br><br><br>
-			<?php $qry = "SELECT * FROM announcements WHERE deleted IS NULL AND approval = 2"; ?>
-			<?php if($result = mysqli_query($link, $qry)): ?>
-			<?php if(mysqli_num_rows($result) > 0): ?> 
-
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">What</th>
-						<th scope="col">When</th>
-						<th scope="col">Where</th>
-						<th scope="col">Content</th>
-						<th scope="col">Posted:</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-						$i=0;
-						$j=1;
-						while($rows = mysqli_fetch_array($result)):
-					?>
-					<tr>
-						<?php 
-							$i++;
-						?>
-						<td classs="text-center">
-							<?php
-								echo $j++;
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["what"]
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["when_date"]
-							?>
-								at
-							<?=
-								$rows["when_time"]
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["location"]
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["content"]
-							?>
-						</td>
-						<td>
-							<?=
-								$rows["time_posted"]
-							?>
-							at
-							<?=
-								$rows["date_posted"]
-							?>
-						</td>
-					</tr>
-				<?php 
-					endwhile; 
-				?>
-				</tbody>
-			</table>
-			<?php
-				else:
-			?>
-				<br><br>
-				<div class="alert alert-danger"><em>No records found.</em></div>
-			<?php
-				endif;
-			?>
-			<?php
-				else:
-			?>
-				<br><br>
-				<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
-			<?php
-				endif;
-			?>
+			<h1><b>Add Users</b><br></h1>
+			<div class = "col-md-12">
+				<form method="post" action = "file-upload-users.php" enctype="multipart/form-data">
+					<div class ="form-group row">
+						<label class = "col-md-3">Select File</label>
+						<div class="col-md-8"></div>
+						<input type="file" name = "uploadfile" class="form-control">
+						</div>
+						</div>
+						<div class ="form-group row">
+							<br><br><br>
+							<label class = "col-md-1"></label>
+							<div class="col-md-2">
+								<input type="submit" name = "submit" class = "btn btn-primary">
+							</div>
+						</div>
+				</form>
+			</div>
 		</div>
 	</div>
 
-
 	<!-- white na container sa gitna -->
-	<div id="white_container_body"></div>
+	<div id="white_container_body">
+		<center><h1>Teachers</h1></center>
+		<?php $qry = "SELECT * FROM users WHERE deleted IS NULL AND user_type = 2"; ?>
+		<?php if($result = mysqli_query($link, $qry)): ?>
+		<?php if(mysqli_num_rows($result) > 0): ?> 
+
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Gender</th>
+					<th scope="col">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$i=0;
+					$j=1;
+					while($rows = mysqli_fetch_array($result)):
+				?>
+				<tr>
+					<?php 
+						$i++;
+					?>
+					<td classs="text-center">
+						<?php
+							echo $j++;
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["last_name"]
+						?>
+						, 
+						<?=
+							$rows["first_name"]
+						?>
+						<?=
+							$rows["middle_name"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["gender"]
+						?>
+					</td>
+					<td>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href=""></a>
+							<a class="dropdown-item" href=""></a>
+						</div>
+					</td>
+				</tr>
+			<?php 
+				endwhile; 
+			?>
+			</tbody>
+		</table>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>No records found.</em></div>
+		<?php
+			endif;
+		?>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+		<?php
+			endif;
+		?>
+
+		<br><br><br><br><br><br>
+		<center><h1>Students</h1></center>
+		<?php $qry = "SELECT * FROM users WHERE deleted IS NULL AND user_type = 1"; ?>
+		<?php if($result = mysqli_query($link, $qry)): ?>
+		<?php if(mysqli_num_rows($result) > 0): ?> 
+
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Gender</th>
+					<th scope="col">Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$i=0;
+					$j=1;
+					while($rows = mysqli_fetch_array($result)):
+				?>
+				<tr>
+					<?php 
+						$i++;
+					?>
+					<td classs="text-center">
+						<?php
+							echo $j++;
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["last_name"]
+						?>
+						, 
+						<?=
+							$rows["first_name"]
+						?>
+						<?=
+							$rows["middle_name"]
+						?>
+					</td>
+					<td>
+						<?=
+							$rows["gender"]
+						?>
+					</td>
+					<td>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href=""></a>
+							<a class="dropdown-item" href=""></a>
+						</div>
+					</td>
+				</tr>
+			<?php 
+				endwhile; 
+			?>
+			</tbody>
+		</table>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>No records found.</em></div>
+		<?php
+			endif;
+		?>
+		<?php
+			else:
+		?>
+			<br><br>
+			<div class="alert alert-danger"><em>Something went wrong. Query related error.</em></div>
+		<?php
+			endif;
+		?>
+	</div>
 
 	<!-- Additional Content -->
 	<div id="additional_container_body">
@@ -305,11 +363,6 @@
 			
 		</div>
 	</div>
-
-	<div class="before_footer"></div>
-	<footer class="footer">
-		2022 - All rights reserved
-	</footer>
 
 
 
