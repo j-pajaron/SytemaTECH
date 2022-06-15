@@ -138,8 +138,8 @@
       <!-- header -->
       <div class="green_header">
         <ul>
-         <center><font face = "impact"><h2>SIGNAL VILLAGE NATIONAL HIGH SCHOOL</center></h2>
-        <img src="svnhs-logo.png" style="width: 130px; height: 130px; margin-left: 650px; margin-top: -5%; padding-top: -70%; ">
+         <center><font face = "arial black"><h2>SIGNAL VILLAGE NATIONAL HIGH SCHOOL</center></h2>
+        <img src="svnhs-logo.png" style="width: 120px; height: 120px; margin-left: 520px; margin-top: -4%; padding-top: -70%; ">
     
        </ul>
     </div>
