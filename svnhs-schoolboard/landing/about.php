@@ -168,7 +168,7 @@
 <body>
 	<!-- header -->
 	<div class="logo-container">
-		<img src="../img/svnhs-logo.png">
+		<img src="svnhs-logo.png">
 		<div class="title-container">
 			<b>Signal Village National High School<br>
 			<font style="font-size: 25px;">SHS BOARD</font></b>
