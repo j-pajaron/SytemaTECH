@@ -38,7 +38,7 @@
         position: fixed;
         top: 20%;
         left: 20%;
-        background-color: #edcd1f;
+        background-color: #f3dc60;
       }
 
       .box {               /*yung kulay grey*/
@@ -63,6 +63,7 @@
         top: 20%;
         left: 20%;
         padding-top: 40px;
+        border-radius: 5px;
       }
 
 
@@ -73,7 +74,7 @@
         position: fixed;
         top: 20%;
         left: 20%;
-        background-color: pink;
+        background-color: #edcd1f;
       }
 
       .logo-background2{        /*Header na yellow*/
@@ -102,7 +103,17 @@
         top: 20%;
         left: 20%;
         padding-top: 40px;
+	border-radius: 50px 20px;
+	
       }
+	#rcorners-container2 {
+        border-radius: 25px;
+      }
+
+.circle {
+  border-radius: 50%;
+}
+
 
     
 

@@ -45,12 +45,13 @@
 		  	list-style-type: none;
 		  	position: fixed;
 		  	height: 100px;
-		  	padding-top: 70px;
+		  	padding-top: 50px;
 		  	z-index: 1;
-		  	margin-left: 900px;
+		  	margin-left: 600px;
+			font-size: 27px;
 		}
 		li{									/*para nakaline yung mga choices*/
-			display: inline;
+			display: inline-block;
 		}
 		li a{								/*yung itsura kapag hinover*/	
 		  	color: white;
@@ -73,8 +74,8 @@
 			background-color: black;
 			opacity: 0.6;
 			height: 960px;
-			margin-left: 450px;
-			margin-right: 450px;
+			margin-left: 385px;
+			margin-right: 400px;
 			z-index: -5;
 			position: relative;
 		}
@@ -85,7 +86,7 @@
 			text-align: center;
 			font-size: 40px;
 			margin-top: -900px;
-			margin-left: 450px;
+			margin-left: 460px;
 			margin-right: 450px;
 			color: white;
 			font-style: "impact";
@@ -189,10 +190,10 @@
 		<div class="title_body"></div>
 		<div class="title_text">
 			<b>SIGNAL VILLAGE NATIONAL HIGH SCHOOL</b><br>
-			<p><font style="font-size: 100px;">SENIOR HIGH</font></p>
-			<p><font style="font-size: 100px;">SCHOOL BOARD</font></p>
-			<img src="shs.png" style="width: 130px; height: 130px; margin-right: -556px; margin-top: -65%; ">
-			<img src="svnhs-logo.png" style="width: 130px; height: 130px; margin-left: -568px; margin-top: -65%; ">
+			<p><span style="font-family:Arial black; font-size: 100px;">SENIOR HIGH</font></p>
+			<p><span style="font-family:Arial black; font-size: 100px;">SCHOOL BOARD</font></p>
+			<img src="shs.png" style="width: 150px; height: 150px; margin-right: -605px; margin-top: -65%; ">
+			<img src="svnhs-logo.png" style="width: 150px; height: 150px; margin-left: -605px; margin-top: -65%; ">
 		
 		</div>
 	</div>
