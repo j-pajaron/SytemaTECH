@@ -86,7 +86,7 @@
 			text-align: center;
 			font-size: 40px;
 			margin-top: -900px;
-			margin-left: 460px;
+			margin-left: 430px;
 			margin-right: 450px;
 			color: white;
 			font-style: "impact";
@@ -192,8 +192,8 @@
 			<b>SIGNAL VILLAGE NATIONAL HIGH SCHOOL</b><br>
 			<p><span style="font-family:Arial black; font-size: 100px;">SENIOR HIGH</font></p>
 			<p><span style="font-family:Arial black; font-size: 100px;">SCHOOL BOARD</font></p>
-			<img src="shs.png" style="width: 150px; height: 150px; margin-right: -605px; margin-top: -65%; ">
-			<img src="svnhs-logo.png" style="width: 150px; height: 150px; margin-left: -605px; margin-top: -65%; ">
+			<img src="shs.png" style="width: 150px; height: 150px; margin-right: -520px; margin-top: -65%; ">
+			<img src="svnhs-logo.png" style="width: 150px; height: 150px; margin-left: -645px; margin-top: -65%; ">
 		
 		</div>
 	</div>
