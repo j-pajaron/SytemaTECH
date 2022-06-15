@@ -7,9 +7,10 @@
         background-image: url('../img/svnhs.jpg');
         background-repeat: no-repeat;
         background-attachment: fixed;
-      
         background-size: cover;
       }
+       
+
        .text{
 
           margin-left:120px;
@@ -126,8 +127,8 @@
       <div class="text">
         <ul>
          <span style ="color:white; font-family:arial black;"><h5>SIGNAL VILLAGE NATIONAL HIGH SCHOOL</h5>
-        <img src="svnhs-logo.png" style="width: 90px; height: 90px; margin-left:-90px; margin-top:-3%; padding-top: -70%; ">
-    
+               <img src="svnhs-logo.png" style="width: 90px; height: 90px; margin-left:-90px; margin-top:-3%; padding-top: -70%; ">
+       
        </ul>
     </div>
 
