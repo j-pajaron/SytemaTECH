@@ -6,6 +6,7 @@
 
 	$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);		/*icoconnect natin sa db usinf link variable*/
 
-	if($link === false)		/*if hindi nagconnct sa db*/{
+	if($link === false)		/*if hindi nagconnct sa db*/
+	{
 		die("ERROR: Cannot connect to mysql. ".mysql_error());		/*mageerror yung lalabas*/
 	}
