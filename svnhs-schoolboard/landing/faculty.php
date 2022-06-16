@@ -8,18 +8,16 @@
 	
 	    .logo-container{				/*Header na yellow*/
 	        width: 19%;
-	        height: 100px;
-	        background-color: yellow;
+	        height: 120px;
+	        background-color: #edcd1f;
 			z-index: 2;
 			position: fixed;
 		}
-
 		img{							/*Logo ng svnhs*/
 			width: 90px;
 			height: 90px;
 			margin-left: 10px;
 		}
-
 		.title-container{				/*Title sa yellow na container*/
 			font-size: 15px;
 			margin-top: -90px;
@@ -30,45 +28,37 @@
 	        text-align: left;
 	        background-color: transparent;
 		}
-
 		.green_header{						/*kulay green sa taas*/
-			height: 100px;
+			height: 120px;
 			width: 100%;
-			background-color: green;
+			background-color: #1c8a43;
 		  	position: fixed;
 		  	z-index: 1;
 		}
-
 		ul{									/*chhoices sa taas*/
 		  	list-style-type: none;
 		  	position: fixed;
 		  	height: 100px;
 		  	padding-top: 50px;
 		  	z-index: 1;
-		  	margin-left: 900px;
+		  	margin-left: 600px;
+			font-size: 27px;
 		}
-
 		li{									/*para nakaline yung mga choices*/
-			display: inline;
+			display: inline-block;
 		}
-
 		li a{								/*yung itsura kapag hinover*/	
 		  	color: white;
 		  	text-align: center;
 		  	padding: 10px 30px;
 		}
-
 		li a:hover:not(.active){			/*yung kulay kapag hinover*/
 		  	background-color: #c0f20a;
 		}
-
 		.active{							/*yung kulay kapag active*/
 			color: #b1cc50;
 		  	background-color: #5b633b;
-		}
-
-
-		/*css ng body*/
+		}		/*css ng body*/
 
 		#faculty_container_body{			/*Container ng faculty*/
 			background-color: transparent;
