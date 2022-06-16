@@ -3,8 +3,10 @@
 <head>
 
 	<style type="text/css">
+
 		/*css ng header*/
 
+	
 	    .logo-container{				/*Header na yellow*/
 	        width: 19%;
 	        height: 120px;
@@ -57,22 +59,47 @@
 		.active{							/*yung kulay kapag active*/
 			color: #b1cc50;
 		  	background-color: #5b633b;
-		}		/*css ng body*/
+		}		/*css ng event*/
 
-		#enrolment_container_body{			/*Container ng enrolment*/
-			background-color: transparent;
-	        height: 300px;
-	        padding-top: 60px;
-	        padding-left: 400px;
-	        font-size: 60px;
+		#event_container_body{				/*Container ng event*/
+	        background-color: transparent;
+	        height: 600px;
+	        padding-top: 200px;
 		}
 
-		#enrolment_data_body{			/*Data ng enrolment*/
-			background-color: yellow;
-	        height: 300px;
-	        padding-top: 60px;
-	        padding-left: 400px;
-	        font-size: 60px;
+		.event_body{						/*yung body ng event*/
+			background-color: white;
+			color:  black;
+			height: 530px;
+			margin-left: 200px;
+			margin-right: 200px;
+		}
+
+		.event_text{						/*yung text ng about*/
+			background-color: transparent;
+			height: 500px;
+			margin-left: 10px;
+			margin-right: 700px;
+			color: black;
+			padding-top:50px;
+			padding-left: 50px;
+			padding-right: 50px;
+			font-size: 15px;
+		}
+
+		.event_picture{						/*yung picture ng about*/
+			height: 500px;
+			margin-top: -500px;
+			margin-left: 800px;
+			margin-right: 10px;
+			padding-top:50px;
+			padding-left: 50px;
+			padding-right: 50px;
+		}
+
+		.before_footer{						/*space bago mag footer*/
+			background-color: #07260f;
+			height: 50px;
 		}
 
 		.footer{							/*footer mismo*/
@@ -81,6 +108,7 @@
 			height: 60px;
 			padding-top: 20px;
 		}
+
 
 	</style>
 
@@ -95,9 +123,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 	<title>School Board</title>
+
 </head>
 
-<body style="font-family: Arial;"> 
+<body style="background-color: #07260f; font-family: Arial;">
 
 	<!-- header -->
 	<div class="logo-container">
@@ -111,24 +140,41 @@
 		<ul>
 			<li><a href="about.php">About</a></li>
 			<li><a href="generalannouncements.php">General Announcement</a></li>
-			<li><a href="events.php">Events</a></li>
-			<li><a class="active" href="#enrolmentreport">Enrollment Reports</a></li>
+			<li><a class="active" href="#events">Events</a></li>
+			<li><a href="enrolmentreport.php">Enrollment Reports</a></li>
 			<li><a href="faculty.php">Faculty</a></li>
 			<li><a href="courses.php">Courses</a></li>
-			<li><a href="login.php">Log In</a></li>
+			<li><a href="../login.php">Log In</a></li>
 		</ul>
 	</div>
-	<br><br><br><br><br><br><br><br>
 
-
-	<div id="enrolment_container_body">
-		<b>Enrolment Report</b>
-		<hr>
+	<!-- Event 1 -->
+	<div id="event_container_body">
+		<div class="event_body">
+			<div class="event_text">
+				<font style="font-size: 30px;"><b>Cats</b></font>
+				<br><hr><br>
+				The cat (Felis catus) is a domestic species of small carnivorous mammal. It is the only domesticated species in the family Felidae and is often referred to as the domestic cat to distinguish it from the wild members of the family. A cat can either be a house cat, a farm cat or a feral cat; the latter ranges freely and avoids human contact. Domestic cats are valued by humans for companionship and their ability to kill rodents. About 60 cat breeds are recognized by various cat registries.<br><br>
+				The cat is similar in anatomy to the other felid species: it has a strong flexible body, quick reflexes, sharp teeth and retractable claws adapted to killing small prey. Its night vision and sense of smell are well developed. Cat communication includes vocalizations like meowing, purring, trilling, hissing, growling and grunting as well as cat-specific body language.
+			</div>
+			<div class="event_picture">
+				<img src="../img/event1.jpg" style="width: 400px; height: 400px;">
+			</div>
+		</div>
 	</div>
-	<div id="enrolment_data_body">
-		
+	<div id="event_container_body">
+		<div class="event_body">
+			<div class="event_text">
+				<font style="font-size: 30px;"><b>Dogs</b></font>
+				<br><hr><br>
+				Today, many of the dogs you know and love are the product of selective breeding between individuals with desirable traits, either physical or behavioral. For instance, around 9,500 years ago, ancient peoples began breeding dogs that were best able to survive and work in the cold. These dogs would become the family of sled dogs—including breeds such as huskies and malamutes—that remains relatively unchanged today.<br><br>
+				Similarly, humans bred German shepherds for their ability to herd livestock, Labrador retrievers to help collect ducks and other game felled by hunters, and sausage-shaped Dachshunds for their ability to rush down a burrow after a badger. Many more breeds were created to fill other human needs, such as home protection and vermin control.
+			</div>
+			<div class="event_picture">
+				<img src="../img/event2.jpg" style="width: 400px; height: 400px;">
+			</div>
+		</div>
 	</div>
-
 	<br><br><br><br>
 	<div class="before_footer"></div>
 	<footer class="footer">
