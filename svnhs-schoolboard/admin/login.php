@@ -101,69 +101,73 @@
         	background-size: cover;
       	}
 
-      	.logo-container{        /*Header na yellow*/
-        	width: 19%;
-        	height: 100px;
-	        background-color: yellow;
-	        z-index: 2;
-	        position: fixed;
-	      }
+        .logo-container{                /*Header na yellow*/
+            width: 24%;
+            height: 150px;
+            background-color: #edcd1f;
+            z-index: 2;
+            position: fixed;
+        }
 
-		img{              /*Logo ng svnhs*/
-	    	width: 90px;
-	    	height: 90px;
-	    	margin-left: 10px;
-	    }
+        img{                            /*Logo ng svnhs*/
+            width: 110px;
+            height: 110px;
+            margin-left: 70px;
+            margin-top: 10px;
+        }
 
-      	.title-container{       /*Title sa yellow na container*/
-        	font-size: 15px;
-        	margin-top: -90px;
-	        padding-top: 20px;
-	        padding-left: 100px;
-	        height: 100px;
-	        width: 100%;
-	        text-align: left;
-	        background-color: transparent;
-	      }
+        .title-container{               /*Title sa yellow na container*/
+            font-size: 15px;
+            margin-top: -100px;
+            padding-top: 20px;
+            padding-left: 180px;
+            height: 100px;
+            width: 100%;
+            text-align: left;
+            background-color: transparent;
+        }
 
-      	.green_header{            /*kulay green sa taas*/
-        	height: 100px;
-	        width: 100%;
-	        background-color: green;
-	        position: fixed;
-	    	z-index: 1;
-	    }
+        .green_header{                      /*kulay green sa taas*/
+            height: 155px;
+            width: 100%;
+            background-color: #1c8a43;
+            position: fixed;
+            z-index: 1;
+        }
 
-      	ul{                 /*chhoices sa taas*/
-        	list-style-type: none;
-	        position: fixed;
-	        height: 100px;
-	        padding-top: 50px;
-	        z-index: 1;
-	        margin-left: 900px;
-	    }
+        ul{                                 /*chhoices sa taas*/
+            list-style-type: none;
+            position: fixed;
+            height: 100px;
+            padding-top: 90px;
+            z-index: 1;
+            margin-left:600px;
+        }
 
-      	li{                 /*para nakaline yung mga choices*/
-        	display: inline;
-      	}
+        li{                                 /*para nakaline yung mga choices*/
+            display: inline;
+            margin-left:40px;
+        }
 
-      	li a{               /*yung itsura kapag hinover*/ 
-        	color: white;
-        	text-align: center;
-        	padding: 10px 30px;
-      	}
+        li a{                               /*yung itsura kapag hinover*/   
+            color: white;
+            text-align: center;
+            padding: 10px 30px;
+        }
 
-      	li a:hover:not(.active){      /*yung kulay kapag hinover*/
-        	background-color: #c0f20a;
-      	}
+        li a:hover:not(.active){            /*yung kulay kapag hinover*/
+            background-color: #c0f20a;
+        }
 
-      	.active{              /*yung kulay kapag active*/
-        	color: #b1cc50;
-        	background-color: #5b633b;
-      	}
+        .active{                            /*yung kulay kapag active*/
+            color: #b1cc50;
+            background-color: #5b633b;
+        }
 
 
-      	/*css ng body*/
+
+
+        /*css ng body*/
 
         .container {						/*yung box*/
             margin-top: 200px;
@@ -248,10 +252,7 @@
                 	<font face = "Bedrock" size = "3" ><input type="submit" class="btn btn-primary" value="Login"></font>
             	</form>
                 <center>Forgot Password?</center>
-                <p><hr>
-                    <center><font face = "Bedrock" size = "3"> Don't have an account? <a href="../register.php">Sign Up</a> here</font></center>
-                </p>
-
+                <br><hr><br>
 		    
 		</div>
 

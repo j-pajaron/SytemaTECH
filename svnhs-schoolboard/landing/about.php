@@ -10,72 +10,86 @@
 			background-size: 100% 100%;
 			font-family:  "Arial";
 		}
+		
 		/*css ng header*/
 	
 	    .logo-container{				/*Header na yellow*/
-	        width: 19%;
-	        height: 120px;
+	        width: 24%;
+	        height: 150px;
 	        background-color: #edcd1f;
 			z-index: 2;
 			position: fixed;
 		}
+
 		img{							/*Logo ng svnhs*/
-			width: 90px;
-			height: 90px;
-			margin-left: 10px;
+			width: 110px;
+			height: 110px;
+			margin-left: 70px;
+			margin-top: 10px;
 		}
+
 		.title-container{				/*Title sa yellow na container*/
 			font-size: 15px;
-			margin-top: -90px;
+			margin-top: -100px;
 	        padding-top: 20px;
-	        padding-left: 100px;
+	        padding-left: 180px;
 	        height: 100px;
 	        width: 100%;
 	        text-align: left;
 	        background-color: transparent;
 		}
+
 		.green_header{						/*kulay green sa taas*/
-			height: 120px;
+			height: 155px;
 			width: 100%;
 			background-color: #1c8a43;
 		  	position: fixed;
 		  	z-index: 1;
 		}
+
 		ul{									/*chhoices sa taas*/
 		  	list-style-type: none;
 		  	position: fixed;
 		  	height: 100px;
-		  	padding-top: 50px;
+		  	padding-top: 90px;
 		  	z-index: 1;
-		  	margin-left: 600px;
-			font-size: 27px;
+		  	margin-left:600px;
 		}
+
 		li{									/*para nakaline yung mga choices*/
-			display: inline-block;
+			display: inline;
+			margin-left:40px;
 		}
+
 		li a{								/*yung itsura kapag hinover*/	
 		  	color: white;
 		  	text-align: center;
 		  	padding: 10px 30px;
 		}
+
 		li a:hover:not(.active){			/*yung kulay kapag hinover*/
 		  	background-color: #c0f20a;
 		}
+
 		.active{							/*yung kulay kapag active*/
 			color: #b1cc50;
 		  	background-color: #5b633b;
 		}
+
+
+
+
 		/*css ng body*/
 		#title_container_body{			/*Container ng SVNHS na title*/
 	        background-color: transparent;
-	        height: 960px;
+	        height: 860px;
 		}
 		.title_body{					/*yung kulay grey sa title*/
 			background-color: black;
 			opacity: 0.6;
 			height: 960px;
-			margin-left: 385px;
-			margin-right: 400px;
+			margin-left: 460px;
+			margin-right: 460px;
 			z-index: -5;
 			position: relative;
 		}
@@ -85,11 +99,12 @@
 			padding-right: 12px;
 			text-align: center;
 			font-size: 40px;
-			margin-top: -900px;
-			margin-left: 430px;
-			margin-right: 450px;
+			margin-top: -990px;
+			margin-left: 580px;
+			margin-right: 580px;
 			color: white;
 			font-style: "impact";
+			background-color: transparent;
 		}
 
 	
@@ -170,8 +185,8 @@
 	<div class="logo-container">
 		<img src="svnhs-logo.png">
 		<div class="title-container">
-			<b>Signal Village National High School<br>
-			<font style="font-size: 25px;">SHS BOARD</font></b>
+			<b>Signal Village National High School<br></b>
+			<font style="font-size: 28px; font-weight: 800;">S&thinsp;H&thinsp;S &thinsp;B&thinsp;O&thinsp;A&thinsp;R&thinsp;D</font>
 		</div>
 	</div>
 	<div class="green_header">
@@ -189,11 +204,11 @@
 	<div id="title_container_body" >
 		<div class="title_body"></div>
 		<div class="title_text">
-			<b>SIGNAL VILLAGE NATIONAL HIGH SCHOOL</b><br>
+			<b><font style="font-family:Arial black; font-size: 30px; font-weight: 800;">SIGNAL VILLAGE NATIONAL HIGH SCHOOL</font></b><br>
 			<p><span style="font-family:Arial black; font-size: 80px;">SENIOR HIGH</font></p>
 			<p><span style="font-family:Arial black; font-size: 80px;">SCHOOL BOARD</font></p>
-			<img src="shs.png" style="width: 150px; height: 150px; margin-right: -520px; margin-top: -55%; ">
-			<img src="svnhs-logo.png" style="width: 150px; height: 150px; margin-left: -645px; margin-top: -55%; ">
+			<img src="shs.png" style="width: 120px; height: 120px; margin-right: -760px; margin-top: -85%; "><br>
+			<img src="svnhs-logo.png" style="width: 120px; height: 120px; margin-left: -840px; margin-top: -100%; ">
 		
 		</div>
 	</div>
