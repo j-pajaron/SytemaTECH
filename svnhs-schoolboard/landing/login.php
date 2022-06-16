@@ -1,3 +1,110 @@
+<?php
+    session_start();                                                                      /*para masave yung information hanngang isara yung browser*/
+
+    if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){                           /*kapag nakalogin na sila*/
+        if(isset($_SESSION["user"]) && $_SESSION['user'] === true){                                /*at user yung nakalogin*/
+            header("location: ../student/generalannouncements.php");                                        /*mapupunta dito si user*/    
+            exit();
+        }
+    }
+
+    else if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){         /*kapag naman nakalogin sila*/
+       if(isset($_SESSION["faculty"]) && $_SESSION['faculty'] === true){                      /*at faculty sila, dederetso sila dito*/
+            header("location: ../faculty/generalannouncements.php");
+            exit();
+        }
+    }
+
+    else if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){         /*kapag naman nakalogin sila*/
+       if(isset($_SESSION["admin"]) && $_SESSION['admin'] === true){                      /*at faculty sila, dederetso sila dito*/
+            header("location: ../admin/generalannouncements.php");
+            exit();
+        }
+    }
+
+  require_once("../config.php") /*required na kasama db sa execution ng file*/
+                  /*hindi include dahil required nga. At once lanf para walng error*/
+?>
+
+
+<?php
+    $username = "";     /*variables*/
+    $password = "";
+
+    $username_err = "";   /*kapag may error sa variables*/
+    $password_err = "";
+    $login_err = "";
+
+
+    /*dito mapupunta yung input ng user gamit ng POST*/
+    if($_SERVER["REQUEST_METHOD"] == "POST"){     /*ito yung tamang paraan daw para magcheck ng form*/
+        if(empty(trim($_POST["username"]))){    /*if walang laman yung email address*/
+            $username_err = "Please enter your username."; /*gagawin niya ito*/
+        }
+        else{                     /*kapag meron laman yung email address, ilalagay niya sa variable na $username yung laman ng 'usernames'*/
+            $username = trim($_POST['username']);
+        }
+        if(empty(trim($_POST["password"]))){      /*katulad land din ng proseso sa email address yung password*/
+            $password_err = "Please enter a password.";
+        }
+        else{
+            $password = trim($_POST['password']);
+        }
+
+        if(empty($username_err) && empty($password_err)){         /*if empty yung error*/
+            $sql = "SELECT id, first_name, middle_name, last_name, username, password, gender, user_type FROM users WHERE username = ?";  
+                                                            /*kukunin niya yung data sa db na may kaparehong username*/
+            if($stmt = mysqli_prepare($link, $sql)){              /*kapag may laman, ipreprepare niya yung laman sql query tulad ng select para sa operation*/
+                mysqli_stmt_bind_param($stmt, "s", $param_username,);     /*kailangan ito para magexecute, binabind niya variables to parameter markers (hindi ko po ito alam)*/
+                $param_username = $username;                  /*eto yun*/
+                if(mysqli_stmt_execute($stmt)){                 /*if may laman yung $stmt = ieexecute niya yon (SELECT)*/         
+                    mysqli_stmt_store_result($stmt);              /*iniistore niya dito yung results*/
+                    if(mysqli_stmt_num_rows($stmt) == 1){           /*irereturn niya yung number of rows sa select at kapag equals sa isa*/
+                        mysqli_stmt_bind_result($stmt, $id, $first_name, $middle_name, $last_name, $username, $hashed_password, $gender, $user_type);   /*ilalagay niya yung result sa variables*/
+                        if(mysqli_stmt_fetch($stmt)){               /*siyempre kailangan kunin, kaya fetch*/
+                                if (password_verify($password, $hashed_password)){  /*if true yung password == hashed password*/
+                                    $_SESSION['logged_in'] = true;          /*gagawin niya to*/  /*session pwedeng magamit hanggang mag log out*/
+                                    if($user_type == 2){
+                                        $_SESSION['faculty'] = true;
+                                         header("location: ../faculty/generalannouncements.php");       /*pupunta siya dito pagkatapos*/
+                                    }
+                                    else if($user_type == 1){
+                                        $_SESSION['user'] = true;
+                                        header("location: ../student/generalannouncements.php");       /*pupunta siya dito pagkatapos*/
+                                    }
+                                    else if($user_type == 3){
+                                        $_SESSION['admin'] = true;
+                                        header("location: ../admin/generalannouncements.php");       /*pupunta siya dito pagkatapos*/
+                                    }
+                                    $_SESSION['id'] = $id;
+                                    $_SESSION['first_name'] = $first_name;
+                                    $_SEESION['middle_name'] = $middle_name;
+                                    $_SESSION['last_name'] = $last_name;
+                                    $_SESSION['username'] = $username;
+                                    $_SESSION['gender'] = $gender;
+                                    $_SESSION['address'] = $address;
+                                    
+                                }
+                                else{               
+                                    $login_err = "Invalid username or password. Try again.";    /*kung hindi tama yung password, eto yung lalabas*/
+                                }
+                        }
+                    }
+                    else{                               /*kapag wala sa tables yung hinahanap niya*/          
+                        $login_err = "No account has been found. Try again";
+                    } 
+                }
+                else{                                 /*may error*/
+                    echo "Oops! Something went wrong.";
+                }
+                mysqli_stmt_close($stmt);             /*isasarado niya na yung prepared statement*/
+            }
+        }
+        mysqli_close($link);                    /*isasarado niya rin yung koneksyon sa db*/
+    }
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,10 +119,9 @@
        
 
        .text{
-
           margin-left:120px;
           padding-top: 50px;
-	}
+	     }
      
      
        /*css ng body*/
@@ -38,13 +144,17 @@
             padding-top: 80px;
         }
        
-       input[type=submit]{       /*login button*/    
-          background-color: green;
+       input[type=submit]{       /*login button*/   
+          font-family:arial;
+          background-color: #1c8a43;
           color: white;
           padding: 10px 30px;
           width: 300px;
           margin: 3px 2px;
           cursor: pointer;
+          border-radius: 50px;
+          font-size: 24px; 
+          font-weight: 800;
         }
 
       .container1 {
@@ -70,41 +180,42 @@
       .logo-background2{        /*Header na yellow*/
           width: 19%;
           height: 120px;
-         position: fixed;
-    }
-    img{              
-      width: 200px;
-      height: 200px;
-      margin-left: 43%;
-      margin-top: 90px;
-    }
-    .title-background2 {
-    font-size: 40px;
-    height: 10em;
-    position: relative 
-    margin-top: 10%;
-    position: absolute;
-    top: 420%;
-    left: 70%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) }  
-       
-   
+          position: fixed;
+      } 
 
+      img{              
+        width: 200px;
+        height: 200px;
+        margin-left: 43%;
+        margin-top: 90px;
+      }
+
+
+      .title-background2 {
+        font-size: 40px;
+        height: 6em;
+        position: absolute;
+        padding-left: 60px;
+        top: 360%;
+        left: 63%;
+        margin-right: -100%;
+        transform: translate(-50%, -50%)
+      }  
+         
       .container2 {
-       position: fixed;
+        position: fixed;
         margin-top: 20px;
         margin-left: 50px;
-        padding-top: 30px;
-        
+        padding-top: 30px; 
+      }
+
+      input[type=text], input[type=password]{
+        border-radius: 10px;
+        padding-top: 26px;
+        padding-bottom: 26px;
+        border: solid 2px;
       }
 	
-
-
-    
-
-
-
 
     </style>
 
@@ -127,7 +238,7 @@
       <div class="text">
         <ul>
          <span style ="color:white; font-family:arial black;"><h5>SIGNAL VILLAGE NATIONAL HIGH SCHOOL</h5>
-               <img src="svnhs-logo.png" style="width: 90px; height: 90px; margin-left:-90px; margin-top:-3%; padding-top: -70%; ">
+          <img src="svnhs-logo.png" style="width: 90px; height: 90px; margin-left:-90px; margin-top:-3%; padding-top: -70%; ">
        
        </ul>
     </div>
@@ -147,7 +258,7 @@
                     <b><center><h4><span style="font-family: arial black;">SIGN IN TO YOUR ACCOUNT</h4></center></b>
                   <div class="form-group">
                       <br>                                    <!-- for validation -->
-                      <input type="text" name="$username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid': '' ?>" value="<?= $username ?>" placeholder="Email Address">
+                      <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid': '' ?>" value="<?= $username ?>" placeholder="Username">
                       <span class="invalid-feedback"><?=$username_err?></span>  <!-- if walang laman lalabas ito -->
                     </center>
                   </div>
@@ -157,9 +268,9 @@
                       <span class="invalid-feedback"><?=$password_err?></span>  <!-- if walang laman lalabas ito -->
                   </div>
                   <br>
-                  <center><font face = "Bedrock" size = "3" ><input type="submit" class="btn btn-primary" value="Login"></center></font>
-              </form>
-                <p>Forgot Password? &emsp; &emsp; &emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &nbsp;&nbsp;&nbsp;Help</p>
+                  <center><font face = "Bedrock" size = "3" ><input type="submit" class="btn btn-primary" value="LOGIN"></center></font>
+              </form><br>
+                <b><p>Forgot Password? &emsp; &emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &nbsp;&nbsp;&nbsp;Help</p></b>
         
     </div>
 
@@ -175,8 +286,10 @@
         <img src="shs.png">
 
 	<div class="title-background2">
-        <font style="font-family: arial black; ">SENIOR HIGH<br>
-<font style="font-family: arial black; margin-right:-500;">SCHOOL BOARD</font>
+    <center> 
+      <font style="font-family: arial black; ">SENIOR HIGH<br>
+      <font style="font-family: arial black; margin-right:-500;">SCHOOL BOARD</font>
+    </center>
 	  
 	 </div> </div>
   </div>

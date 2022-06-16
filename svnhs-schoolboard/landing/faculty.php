@@ -7,24 +7,25 @@
 
 	
 	    .logo-container{				/*Header na yellow*/
-	        width: 19%;
-	        height: 100px;
-	        background-color: yellow;
+	        width: 24%;
+	        height: 150px;
+	        background-color: #edcd1f;
 			z-index: 2;
 			position: fixed;
 		}
 
 		img{							/*Logo ng svnhs*/
-			width: 90px;
-			height: 90px;
-			margin-left: 10px;
+			width: 110px;
+			height: 110px;
+			margin-left: 70px;
+			margin-top: 10px;
 		}
 
 		.title-container{				/*Title sa yellow na container*/
 			font-size: 15px;
-			margin-top: -90px;
+			margin-top: -100px;
 	        padding-top: 20px;
-	        padding-left: 100px;
+	        padding-left: 180px;
 	        height: 100px;
 	        width: 100%;
 	        text-align: left;
@@ -32,9 +33,9 @@
 		}
 
 		.green_header{						/*kulay green sa taas*/
-			height: 100px;
+			height: 155px;
 			width: 100%;
-			background-color: green;
+			background-color: #1c8a43;
 		  	position: fixed;
 		  	z-index: 1;
 		}
@@ -43,13 +44,14 @@
 		  	list-style-type: none;
 		  	position: fixed;
 		  	height: 100px;
-		  	padding-top: 50px;
+		  	padding-top: 90px;
 		  	z-index: 1;
-		  	margin-left: 900px;
+		  	margin-left:600px;
 		}
 
 		li{									/*para nakaline yung mga choices*/
 			display: inline;
+			margin-left:40px;
 		}
 
 		li a{								/*yung itsura kapag hinover*/	
@@ -66,6 +68,7 @@
 			color: #b1cc50;
 		  	background-color: #5b633b;
 		}
+
 
 
 		/*css ng body*/
@@ -116,8 +119,8 @@
 	<div class="logo-container">
 		<img src="../img/svnhs-logo.png">
 		<div class="title-container">
-			<b>Signal Village National High School<br>
-			<font style="font-size: 25px;">SHS BOARD</font></b>
+			<b>Signal Village National High School<br></b>
+			<font style="font-size: 28px; font-weight: 800;">S&thinsp;H&thinsp;S &thinsp;B&thinsp;O&thinsp;A&thinsp;R&thinsp;D</font>
 		</div>
 	</div>
 	<div class="green_header">
@@ -128,7 +131,7 @@
 			<li><a href="enrolmentreport.php">Enrollment Reports</a></li>
 			<li><a class="active" href="#faculty">Faculty</a></li>
 			<li><a href="courses.php">Courses</a></li>
-			<li><a href="../login.php">Log In</a></li>
+			<li><a href="login.php">Log In</a></li>
 		</ul>
 	</div>
 	<br><br><br><br><br><br><br><br>
