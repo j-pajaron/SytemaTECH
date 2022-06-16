@@ -118,7 +118,7 @@
 			<li><a href="enrolmentreport.php">Enrollment Reports</a></li>
 			<li><a class="active" href="#faculty">Faculty</a></li>
 			<li><a href="courses.php">Courses</a></li>
-			<li><a href="../login.php">Log In</a></li>
+			<li><a href="login.php">Log In</a></li>
 		</ul>
 	</div>
 	<br><br><br><br><br><br><br><br>
