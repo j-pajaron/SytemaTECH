@@ -112,6 +112,43 @@
 			padding-top: 20px;
 		}
 
+		/*Dropdown*/
+
+		.dropbtn {
+		  background-color: transparent	;
+		  color: white;
+		  padding: 16px;
+		  font-size: 14px;
+		  border: none;
+		  cursor: pointer;
+		}
+
+		.dropdown {
+		  position: relative;
+		  display: inline-block;
+		}
+
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  right: 0;
+		  background-color: #f9f9f9;
+		  min-width: 160px;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 1;
+		}
+
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}
+
+		.dropdown:hover .dropdown-content {display: block;}
+
+		/*end of dropdown*/
+
 	</style>
 
 	<meta charset="utf-8">
@@ -140,7 +177,16 @@
 	<div class="green_header">
 		<ul>
 			<li><a href="generalannouncements.php">General Announcement</a></li>
-			<li><a href="grades.php">Grades</a></li>
+			<li>
+				<div class="dropdown">
+				  <a href="grades.php"><button class="dropbtn">Grades</button></a>
+				  <div class="dropdown-content" style="position: center;">
+				    <a href="#">School Year</a>
+				    <a href="#">Strand</a>
+				    <a href="#">Subject</a>
+				  </div>
+				</div>
+			</li>
 			<li><a class="active" href="#documentrequest">Document Request</a></li>
 			<li><a href="profile.php">Profile</a></li>	
 		</ul>
